@@ -17,9 +17,8 @@ if module_dir not in sys.path:
 # Custom modules
 from angles import degrees_to_radians, radians_to_degrees
 
-# From this directory
-from logic_helper import is_near_on_circle
-
+def is_near_on_circle(x: Number, y: Number, fudge: Number, mod: Number) -> bool:
+    return (abs(x - y) < fudge) or (abs(x - y - mod) < fudge) or (abs(x - y + mod) < fudge)
 
 class AnglesTests(unittest.TestCase):
     _fudge = 1e-6

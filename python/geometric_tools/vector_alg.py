@@ -24,22 +24,22 @@ class Vector(object):
     def __add__(self, other: Vector) -> Vector:
         if not isinstance(other, Vector):
             return NotImplemented
-        return self.__class__(self.array + other.array)
+        return self.__class__(*list(self.array + other.array))
 
     def __sub__(self, other: Vector) -> Vector:
         if not isinstance(other, Vector):
             return NotImplemented
-        return self.__class__(self.array - other.array)
+        return self.__class__(*list(self.array - other.array))
 
     def __mul__(self, other: Number) -> Vector:
         if not isinstance(other, Number):
             return NotImplemented
-        return self.__class__(other * self.array)
+        return self.__class__(*(list(other * self.array)))
 
     def __rmul__(self, other: Number) -> Vector:
         if not isinstance(other, Number):
             raise TypeError("You can only use a scalar for rmul.")
-        return self.__class__(other * self.array)
+        return self.__class__(*list(other * self.array))
 
     def __neg__(self) -> Vector:
         return -1 * self
@@ -71,6 +71,12 @@ class Vector(object):
     def mag(self) -> Number:
         """ Short for magnitude.  The L2 norm. """
         return np.sqrt(dot(self, self))
+
+    def unit(self) -> Vector_3D:
+        mag = self.mag()
+        if mag == 0:
+            raise ValueError("The 0 vector does not have a unit.")
+        return self / mag
 
 
 def dot(vec_1: type[Vector], vec_2: type[Vector]) -> Number:

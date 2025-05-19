@@ -1,0 +1,9 @@
+[tool.coverage.run]
+omit = [
+  "tests/*",
+  "*__init__.py"
+]
+data_file = "artifacts/.coverage"
+
+[tool.coverage.html]
+directory = "artifacts/htmlcov"
